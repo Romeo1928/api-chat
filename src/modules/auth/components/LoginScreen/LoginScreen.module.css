@@ -49,6 +49,10 @@
 }
 
 .submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   margin-top: 8px;
   height: 44px;
   border: none;
@@ -66,4 +70,19 @@
 .submit:disabled {
   opacity: 0.7;
   cursor: default;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid #0f141966;
+  border-top-color: #0f1419;
+  animation: spin 700ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

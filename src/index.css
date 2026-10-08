@@ -4,11 +4,22 @@
   box-sizing: border-box;
 }
 
+:root {
+  color-scheme: dark;
+}
+
 html,
 body,
 #root {
   margin: 0;
   min-height: 100%;
+}
+
+/* Screens fade in from opacity 0 — the page behind them must be dark, not default white. */
+html,
+body {
+  background: #0f1419;
+  color: #e7e9ea;
 }
 
 body {

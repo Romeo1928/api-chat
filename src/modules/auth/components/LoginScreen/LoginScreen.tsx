@@ -14,7 +14,6 @@ import type { AuthCredentials } from 'src/modules/auth/types/AuthCredentials';
 import type { CredentialsFieldErrors, CredentialsFieldName } from 'src/modules/auth/types/CredentialsFieldErrors';
 import { getStateInstance } from 'src/modules/common/api/greenApi/greenApi';
 import { mapCaughtApiError } from 'src/modules/common/api/greenApi/mapApiError';
-import { AppLoader } from 'src/modules/common/components/AppLoader';
 
 import styles from 'src/modules/auth/components/LoginScreen/LoginScreen.module.css';
 
@@ -87,7 +86,7 @@ export const LoginScreen = () => {
         return;
       }
 
-      // Keep loader until App switches to AuthenticatedShell.
+      // Keep the submitting state until App switches to AuthenticatedShell.
       setCredentials(credentials);
     } catch (caughtError) {
       setFormError(mapCaughtApiError(caughtError, 'Не удалось проверить инстанс'));
@@ -95,13 +94,10 @@ export const LoginScreen = () => {
     }
   };
 
-  if (isSubmitting) {
-    return <AppLoader label="Проверка инстанса…" />;
-  }
-
+  // No full-screen loader here: the check takes ~200ms, swapping screens for that reads as a flash.
   return (
     <div className={styles.root}>
-      <form className={styles.form} onSubmit={handleSubmit} noValidate>
+      <form className={styles.form} onSubmit={handleSubmit} noValidate aria-busy={isSubmitting}>
         <div className={styles.header}>
           <h1 className={styles.title}>GREEN-API Chat</h1>
           <p className={styles.hint}>Данные инстанса из кабинета GREEN-API</p>
@@ -152,7 +148,8 @@ export const LoginScreen = () => {
         ) : null}
 
         <button className={styles.submit} type="submit" disabled={isSubmitting}>
-          {isSubmitting ? 'Проверка…' : 'Войти'}
+          {isSubmitting ? <span className={styles.spinner} aria-hidden="true" /> : null}
+          {isSubmitting ? 'Проверка инстанса…' : 'Войти'}
         </button>
       </form>
     </div>
