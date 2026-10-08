@@ -1,0 +1,64 @@
+.root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #0f1419;
+  color: #e7e9ea;
+  font-family:
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    sans-serif;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 64px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #38444d;
+  background: #15202b;
+}
+
+.title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.meta {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: #8b98a5;
+}
+
+.logout {
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 8px;
+  border: 1px solid #38444d;
+  background: transparent;
+  color: #e7e9ea;
+  cursor: pointer;
+}
+
+.logout:hover {
+  border-color: #8b98a5;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.placeholder {
+  margin: 0;
+  color: #8b98a5;
+  font-size: 15px;
+}
