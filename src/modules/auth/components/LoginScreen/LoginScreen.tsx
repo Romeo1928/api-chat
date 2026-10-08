@@ -1,8 +1,7 @@
 import type { SubmitEvent } from 'react';
 import { useState } from 'react';
 
-import { LoginField } from 'src/modules/auth/components/LoginField';
-import type { CredentialsFieldErrors, CredentialsFieldName } from 'src/modules/auth/helpers/getCredentialsFieldErrors';
+import { LoginField } from 'src/modules/auth/components/LoginScreen/elements/LoginField';
 import {
   getCredentialsFieldError,
   getCredentialsFieldErrors,
@@ -12,8 +11,10 @@ import { getInstanceStateError } from 'src/modules/auth/helpers/getInstanceState
 import { normalizeCredentials } from 'src/modules/auth/helpers/normalizeCredentials';
 import { useAuthStore } from 'src/modules/auth/stores/authStore';
 import type { AuthCredentials } from 'src/modules/auth/types/AuthCredentials';
+import type { CredentialsFieldErrors, CredentialsFieldName } from 'src/modules/auth/types/CredentialsFieldErrors';
 import { getStateInstance } from 'src/modules/common/api/greenApi/greenApi';
 import { mapCaughtApiError } from 'src/modules/common/api/greenApi/mapApiError';
+import { AppLoader } from 'src/modules/common/components/AppLoader';
 
 import styles from 'src/modules/auth/components/LoginScreen/LoginScreen.module.css';
 
@@ -50,7 +51,7 @@ export const LoginScreen = () => {
   const handleFieldBlur = (fieldName: CredentialsFieldName) => {
     const value = normalizeCredentials(values)[fieldName];
 
-    // пустое поле подсвечиваем только на сабмите
+    // Highlight empty fields only on submit.
     if (!value) {
       return;
     }
@@ -82,16 +83,21 @@ export const LoginScreen = () => {
 
       if (stateError) {
         setFormError(stateError);
+        setIsSubmitting(false);
         return;
       }
 
+      // Keep loader until App switches to AuthenticatedShell.
       setCredentials(credentials);
     } catch (caughtError) {
       setFormError(mapCaughtApiError(caughtError, 'Не удалось проверить инстанс'));
-    } finally {
       setIsSubmitting(false);
     }
   };
+
+  if (isSubmitting) {
+    return <AppLoader label="Проверка инстанса…" />;
+  }
 
   return (
     <div className={styles.root}>

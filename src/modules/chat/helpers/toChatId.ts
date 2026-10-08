@@ -1,5 +1,2 @@
-export const toChatId = (phone: string): string => {
-  const digits = phone.replace(/\D/g, '');
-
-  return `${digits}@c.us`;
-};
+/** Expects digits from normalizePhoneInput. */
+export const toChatId = (digits: string): string => `${digits}@c.us`;

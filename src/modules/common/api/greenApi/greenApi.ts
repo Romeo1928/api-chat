@@ -1,4 +1,4 @@
-import { checkIsAbortError, GreenApiNetworkError } from 'src/modules/common/api/greenApi/errors';
+import { checkIsAbortError, GreenApiHttpError, GreenApiNetworkError } from 'src/modules/common/api/greenApi/errors';
 import { mapHttpStatusError, truncateErrorMessage } from 'src/modules/common/api/greenApi/mapApiError';
 import type {
   AuthCredentials,
@@ -68,7 +68,7 @@ const ensureOk = async (response: Response): Promise<void> => {
   }
 
   const message = await readErrorMessage(response);
-  throw new Error(mapHttpStatusError(response.status, message));
+  throw new GreenApiHttpError(response.status, mapHttpStatusError(response.status, message));
 };
 
 export const getStateInstance = async (

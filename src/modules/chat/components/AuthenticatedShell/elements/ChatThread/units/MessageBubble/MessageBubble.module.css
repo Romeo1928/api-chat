@@ -1,0 +1,44 @@
+.messageRow {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.messageRowOutgoing {
+  justify-content: flex-end;
+}
+
+.bubble {
+  max-width: min(520px, 85%);
+  padding: 10px 12px;
+  border-radius: 14px 14px 14px 4px;
+  background: #1e2732;
+  color: #e7e9ea;
+}
+
+.bubbleOutgoing {
+  border-radius: 14px 14px 4px 14px;
+  background: #00ba7c;
+  color: #0f1419;
+}
+
+.messageText {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.messageMeta {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 6px;
+  font-size: 11px;
+  opacity: 0.75;
+}
+
+.statusError {
+  color: #f4212e;
+  opacity: 1;
+}

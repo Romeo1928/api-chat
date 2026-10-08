@@ -1,11 +1,8 @@
 import type { AuthCredentials } from 'src/modules/auth/types/AuthCredentials';
+import type { CredentialsFieldErrors, CredentialsFieldName } from 'src/modules/auth/types/CredentialsFieldErrors';
 
 const ID_INSTANCE_PATTERN = /^\d+$/;
 const REQUIRED_FIELD_ERROR = 'Обязательное поле';
-
-export type CredentialsFieldName = keyof AuthCredentials;
-
-export type CredentialsFieldErrors = Partial<Record<CredentialsFieldName, string>>;
 
 const CREDENTIALS_FIELD_NAMES = ['idInstance', 'apiTokenInstance', 'apiUrl'] as const;
 

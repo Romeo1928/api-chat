@@ -1,3 +1,5 @@
+import { checkIsUnauthorizedStatus } from 'src/modules/common/api/greenApi/errors';
+
 const MAX_ERROR_MESSAGE_LENGTH = 200;
 
 export const truncateErrorMessage = (message: string): string => {
@@ -9,7 +11,7 @@ export const truncateErrorMessage = (message: string): string => {
 };
 
 export const mapHttpStatusError = (status: number, message: string): string => {
-  if (status === 401 || status === 403) {
+  if (checkIsUnauthorizedStatus(status)) {
     return 'Неверный idInstance или apiTokenInstance';
   }
 

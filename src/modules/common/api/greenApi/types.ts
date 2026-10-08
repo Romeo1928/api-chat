@@ -7,7 +7,8 @@ export type AuthCredentials = {
 };
 
 export type GetStateInstanceResponse = {
-  stateInstance: InstanceState;
+  // Open union: API may add states that INSTANCE_STATES doesn't know yet.
+  stateInstance: InstanceState | (string & {});
 };
 
 export type SendMessagePayload = {
@@ -25,7 +26,7 @@ export type DeleteNotificationResponse = {
 };
 
 export type IncomingNotificationBody = {
-  // GREEN-API шлёт и другие типы (incomingCall, quotaExceeded, …) — оставляем открытым
+  // GREEN-API may send webhook types outside WEBHOOK_TYPES.
   typeWebhook: WebhookType | (string & {});
   timestamp: number;
   idMessage: string;
